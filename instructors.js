@@ -1,5 +1,6 @@
 // Serve para criar json com os dados simulando o BD
 const fs = require('fs')
+const data = require('./data.json')
 
 exports.post = function(req, res){
 
@@ -11,7 +12,9 @@ exports.post = function(req, res){
             return res.send('Preencha todos os campos!')
     }
 
-    fs.writeFile('data.json', JSON.stringify(req.body), function(err){
+    data.instructors.push(req.body)
+
+    fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
         if (err) return res.send('Os dados não foram salvos!')
 
         return res.redirect('/instructors')

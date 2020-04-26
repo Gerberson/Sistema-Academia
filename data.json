@@ -1,1 +1,18 @@
-{"avatar_url":"http://gerberson","name":"Gerberson","birth":"2001-01-01","gender":"M","services":"ssssss"}
+{
+  "instructors": [
+    {
+      "avatar_url": "http://gerberson",
+      "name": "Gerberson",
+      "birth": "2001-01-01",
+      "gender": "M",
+      "services": "sssss"
+    },
+    {
+      "avatar_url": "http://miriam",
+      "name": "Miriam",
+      "birth": "2001-02-02",
+      "gender": "M",
+      "services": "aaaaaaaaaaaa"
+    }
+  ]
+}
