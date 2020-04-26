@@ -23,8 +23,8 @@
       "name": "teste",
       "avatar_url": "http://teste",
       "birth": 1582156800000,
-      "gender": "M",
-      "services": "um, dois, tres",
+      "gender": "F",
+      "services": "um, dois",
       "created_at": 1587920254303
     }
   ]
