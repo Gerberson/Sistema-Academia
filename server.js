@@ -5,11 +5,11 @@ const bodyParser = require('body-parser')
 
 const server = express()
 
+// responsavel por funcionar o body
+server.use(express.urlencoded({ extended: true }))
 server.use(express.static('public'))
 server.use(express.static('public/assets'))
 server.use(routes)
-server.use(bodyParser.urlencoded({extended: false}))
-server.use(bodyParser.json())
 
 server.set('view engine', 'njk')
 
