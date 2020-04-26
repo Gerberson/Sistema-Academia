@@ -2,6 +2,22 @@
 const fs = require('fs')
 const data = require('./data.json')
 
+//req.query.id = ?id=1
+//req.body
+//req.params.id = /:id
+exports.findById = function(req, res) {
+    const { id } = req.params
+
+    const foundInstructor = data.instructors.find(function(instructor) {
+        return id == instructor.id
+    })
+
+    if (!foundInstructor)
+        return res.send('Instrutor não encontrado!')
+
+    return res.render('instructors/show', { instructor: foundInstructor })
+}
+
 exports.post = function(req, res){
 
     // Transforma o json em objeto(array)
