@@ -13,6 +13,8 @@ exports.post = function(req, res){
     }
     req.body.birth = Date.parse(req.body.birth)
     req.body.created_at = Date.now()
+    req.body.id = Number(data.instructors.length + 1)
+
     data.instructors.push(req.body)
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
