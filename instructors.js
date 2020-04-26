@@ -1,6 +1,7 @@
 // Serve para criar json com os dados simulando o BD
 const fs = require('fs')
 const data = require('./data.json')
+const { age } = require('./utils')
 
 //req.query.id = ?id=1
 //req.body
@@ -17,9 +18,9 @@ exports.findById = function(req, res) {
 
     const instructor = {
         ...foundInstructor,
-        age: "",
+        age: age(foundInstructor.birth),
         services: foundInstructor.services.split(","),
-        created_at: "",
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
     }
 
     return res.render('instructors/show', { instructor })
