@@ -15,7 +15,18 @@ exports.post = function(req, res){
     req.body.created_at = Date.now()
     req.body.id = Number(data.instructors.length + 1)
 
-    data.instructors.push(req.body)
+    // Destruturar os dados, garante que não sera passado dados maliciosos 
+    const {avatar_url, birth, created_at, id, name, services, gender } = req.body
+
+    data.instructors.push({
+        id,
+        name,
+        avatar_url,
+        birth,
+        gender,
+        services,
+        created_at
+    })
 
     fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
         if (err) return res.send('Os dados não foram salvos!')

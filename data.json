@@ -1,43 +1,13 @@
 {
   "instructors": [
     {
-      "avatar_url": "http://gerberson",
+      "id": 1,
       "name": "Gerberson",
-      "birth": "2001-01-01",
-      "gender": "M",
-      "services": "sssss"
-    },
-    {
-      "avatar_url": "http://miriam",
-      "name": "Miriam",
-      "birth": "2001-02-02",
-      "gender": "M",
-      "services": "aaaaaaaaaaaa"
-    },
-    {
-      "avatar_url": "http://teste",
-      "name": "teste",
-      "birth": "2003-03-03",
-      "gender": "M",
-      "services": "eeeeeeeeeeeeee",
-      "created_at": 1587915732152
-    },
-    {
       "avatar_url": "http://gerberson",
-      "name": "Gerberson",
-      "birth": 1081036800000,
-      "gender": "M",
-      "services": "eeeeeeeeeeeeee",
-      "created_at": 1587915916014
-    },
-    {
-      "avatar_url": "http://gerberson",
-      "name": "Miriam",
       "birth": 946684800000,
-      "gender": "M",
-      "services": "s",
-      "created_at": 1587916161718,
-      "id": 5
+      "gender": "F",
+      "services": "eeeeeeeeeee",
+      "created_at": 1587916791832
     }
   ]
 }
