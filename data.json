@@ -4,37 +4,10 @@
       "id": 1,
       "name": "Gerberson",
       "avatar_url": "http://gerberson",
-      "birth": 946684800000,
-      "gender": "F",
-      "services": "eeeeeeeeeee",
-      "created_at": 1587916791832
-    },
-    {
-      "id": 2,
-      "name": "Miriam",
-      "avatar_url": "http://miriam",
-      "birth": 951004800000,
-      "gender": "M",
-      "services": "mmmmm",
-      "created_at": 1587918844353
-    },
-    {
-      "id": 3,
-      "name": "teste",
-      "avatar_url": "http://teste",
-      "birth": 1582156800000,
-      "gender": "F",
-      "services": "um, dois",
-      "created_at": 1587920254303
-    },
-    {
-      "id": 4,
-      "name": "Fabiano",
-      "avatar_url": "http://gerberson",
       "birth": 660182400000,
       "gender": "M",
-      "services": "sssss",
-      "created_at": 1587936067590
+      "services": "Fit, CrossOver",
+      "created_at": 1587960729554
     }
   ]
 }

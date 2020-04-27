@@ -1,29 +1,20 @@
 // Serve para criar json com os dados simulando o BD
 const fs = require('fs')
-const data = require('./data.json')
-const { age } = require('./utils')
+const bd = require('./data.json')
+const { age, date } = require('./utils')
 
 //req.query.id = ?id=1
 //req.body
 //req.params.id = /:id
-exports.findById = function(req, res) {
+exports.show = function(req, res) {
     const { id } = req.params
 
-    const foundInstructor = data.instructors.find(function(instructor) {
-        return id == instructor.id
-    })
+    const data = findById(id)
 
-    if (!foundInstructor)
+    if (!data)
         return res.send('Instrutor não encontrado!')
 
-    const instructor = {
-        ...foundInstructor,
-        age: age(foundInstructor.birth),
-        services: foundInstructor.services.split(","),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
-    }
-
-    return res.render('instructors/show', { instructor })
+    return res.render('instructors/show', { instructor: data })
 }
 
 exports.post = function(req, res){
@@ -59,4 +50,65 @@ exports.post = function(req, res){
     })
 
     //return res.send(req.body)
+}
+
+exports.edit = function(req, res){
+    const { id } = req.params
+
+    const data = findById(id)
+
+    if (!data)
+        return res.send('Instrutor não encontrado!')
+
+    return res.render('instructors/edit', { instructor: data })
+}
+
+exports.put = function(req, res) {
+    const { id } = req.body
+    let index = 0
+
+    const foundInstructor = bd.instructors.find(function(instructor, foundIndex) {
+        if (id == instructor.id) {
+            index = foundIndex
+            return true
+        }
+    })
+
+    if (!foundInstructor)
+        return res.send('Instrutor não encontrado!')
+
+    const instructor = {
+        ...data,
+        ...req.body,
+        birth: Date.parse(req.body.birth)
+    }
+
+    data.instructors[index] = instructor
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+        if (err)
+            return res.send('O instrutor não foi alterado')
+        
+        return res.redirect(`/instructors/${id}`)
+    })
+    return res.render('instructors/edit', { instructor })
+}
+
+function findById(id){
+    const foundInstructor = bd.instructors.find(function(instructor) {
+        return id == instructor.id
+    })
+
+    if (!foundInstructor)
+        return false
+
+    const instructor = {
+        ...foundInstructor,
+        birth: date(foundInstructor.birth),
+        age: age(foundInstructor.birth),
+        services: foundInstructor.services.split(","),
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
+    }
+
+    return instructor
 }
