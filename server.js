@@ -1,7 +1,7 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
-const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 
 const server = express()
 
@@ -9,6 +9,7 @@ const server = express()
 server.use(express.urlencoded({ extended: true }))
 server.use(express.static('public'))
 server.use(express.static('public/assets'))
+server.use(methodOverride('_method')) // deve estar acima do routes para sobrescrever os metodos do FORM
 server.use(routes)
 
 server.set('view engine', 'njk')

@@ -1,12 +1,12 @@
 {
   "instructors": [
     {
-      "id": 1,
-      "name": "Gerberson",
-      "avatar_url": "http://gerberson",
-      "birth": 660182400000,
+      "id": "1",
+      "name": "Gerberson Dias",
+      "avatar_url": "http://gerbersondias",
+      "birth": 660528000000,
       "gender": "M",
-      "services": "Fit, CrossOver",
+      "services": "CrossOver, Musculação",
       "created_at": 1587960729554
     }
   ]

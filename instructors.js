@@ -28,12 +28,12 @@ exports.post = function(req, res){
     }
     req.body.birth = Date.parse(req.body.birth)
     req.body.created_at = Date.now()
-    req.body.id = Number(data.instructors.length + 1)
+    req.body.id = Number(bd.instructors.length + 1)
 
     // Destruturar os dados, garante que não sera passado dados maliciosos 
     const {avatar_url, birth, created_at, id, name, services, gender } = req.body
 
-    data.instructors.push({
+    bd.instructors.push({
         id,
         name,
         avatar_url,
@@ -43,7 +43,7 @@ exports.post = function(req, res){
         created_at
     })
 
-    fs.writeFile('data.json', JSON.stringify(data, null, 2), function(err){
+    fs.writeFile('data.json', JSON.stringify(bd, null, 2), function(err){
         if (err) return res.send('Os dados não foram salvos!')
 
         return res.redirect('/instructors')
@@ -78,20 +78,36 @@ exports.put = function(req, res) {
         return res.send('Instrutor não encontrado!')
 
     const instructor = {
-        ...data,
+        ...foundInstructor,
         ...req.body,
         birth: Date.parse(req.body.birth)
     }
 
-    data.instructors[index] = instructor
+    bd.instructors[index] = instructor
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+    fs.writeFile("data.json", JSON.stringify(bd, null, 2), function(err){
         if (err)
             return res.send('O instrutor não foi alterado')
         
         return res.redirect(`/instructors/${id}`)
     })
-    return res.render('instructors/edit', { instructor })
+}
+
+exports.delete = function(req, res){
+    const { id } = req.body
+
+    const filteredInstructors = bd.instructors.filter(function(instructor){
+        return instructor.id != id
+    })
+
+    bd.instructors = filteredInstructors
+
+    fs.writeFile("data.json", JSON.stringify(bd, null, 2), function(err){
+        if (err) 
+            return res.send('O instrutor não foi deletado')
+        
+        return res.redirect('/instructors')
+    })
 }
 
 function findById(id){
