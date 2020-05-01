@@ -1,5 +1,5 @@
 const instructor = require('../models/instructor')
-const { age } = require('../../lib/utils')
+const { age, date } = require('../../lib/utils')
 
 module.exports = {
     index(req, res) {
@@ -19,9 +19,8 @@ module.exports = {
 
             instructor.created_at = date(instructor.created_at).format
 
-            return res.render('instructors/show', instructor)
+            return res.render('instructors/show', { instructor })
         })
-        return
     },
     post(req, res) {
         instructor.create(req.body, function(instructor) {
@@ -29,7 +28,13 @@ module.exports = {
         })
     },
     edit(req, res) {
-        return
+        instructor.find(req.params.id, function(instructor) {
+            if(!instructor) return res.send('Instrutor não encontrado.')
+
+            instructor.birth = date(instructor.birth).iso
+
+            return res.render('instructors/edit', { instructor })
+        })
     },
     put(req, res) {
         const keys = Object.keys(req.body)
@@ -38,6 +43,10 @@ module.exports = {
             if (req.body[key] == "")
                 return res.send('Preencha todos os campos!')
         }
+
+        instructor.update(req.body, function() {
+            return res.redirect(`instructors/${req.body.id}`)
+        })
         return
     },
     delete(req, res) {
