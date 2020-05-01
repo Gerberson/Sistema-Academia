@@ -1,11 +1,20 @@
 // Serve para criar json com os dados simulando o BD
 const fs = require('fs')
-const bd = require('./data.json')
-const { age, date } = require('./utils')
+const bd = require('../data.json')
+const { age, date } = require('../utils')
 
 //req.query.id = ?id=1
 //req.body
 //req.params.id = /:id
+exports.index = function(req, res){
+
+    return res.render('instructors/index', { instructors: bd.instructors })
+}
+
+exports.create = function(req, res){
+    return res.render('instructors/create')
+}
+
 exports.show = function(req, res) {
     const { id } = req.params
 
@@ -80,7 +89,8 @@ exports.put = function(req, res) {
     const instructor = {
         ...foundInstructor,
         ...req.body,
-        birth: Date.parse(req.body.birth)
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id)
     }
 
     bd.instructors[index] = instructor
@@ -120,7 +130,7 @@ function findById(id){
 
     const instructor = {
         ...foundInstructor,
-        birth: date(foundInstructor.birth),
+        birth: date(foundInstructor.birth).iso,
         age: age(foundInstructor.birth),
         services: foundInstructor.services.split(","),
         created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
