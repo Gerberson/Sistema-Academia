@@ -1,7 +1,6 @@
-// Serve para criar json com os dados simulando o BD
-const fs = require('fs')
-const bd = require('../data.json')
-const { age, date } = require('../utils')
+'use strict'
+
+const { age, date } = require('../../lib/utils')
 
 //req.query.id = ?id=1
 //req.body
